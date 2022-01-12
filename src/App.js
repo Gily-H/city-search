@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import Layout from "./Layout";
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    
+export default class App extends Component {
+  render() {
+    return <Layout />;
   }
 }
