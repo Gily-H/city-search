@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.layout-container {
+  text-align: center;
+}
+
+.header {
+  background-color: rgb(41, 41, 41);
+  color: white;
+  padding: 2rem 0;
+  font-size: 2.5rem;
+}
+
+.input-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search-field {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+}
+
+.results-container {
+  padding: 1rem 0;
+  margin: 1rem auto;
+  height: 30rem;
+  max-width: 90%;
+  border-radius: 6px;
+  border: 4px solid rgba(221, 221, 221, 0.52);
+}
+
+.results {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+}

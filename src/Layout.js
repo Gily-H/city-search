@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Layout.css";
 
 export default class Layout extends Component {
   constructor(props) {
@@ -7,28 +8,21 @@ export default class Layout extends Component {
       city: "",
       data: [],
     };
-    this.fetch = false;
     this.baseUrl = "http://ctp-zip-api.herokuapp.com/city/";
   }
 
-  componentDidUpdate(prevState) {
-    console.log(this.state.city);
-
-    if (this.fetch === true) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.city !== this.state.city) {
+      this.setState({ data: [] });
       fetch(this.baseUrl + this.state.city.toUpperCase())
         .then((res) => res.json())
-        .then((data) => {
-          this.fetch = false;
-          this.setState({ data: data });
-          console.log(data);
-        })
+        .then((data) => this.setState({ data: data }))
         .catch((error) => console.log(error));
     }
   }
 
   updateCity = (event) => {
     this.setState({ city: event.target.value });
-    this.fetch = true;
   };
 
   getResults = () => {
@@ -37,14 +31,24 @@ export default class Layout extends Component {
 
   render() {
     return (
-      <div>
-        <h1>City Search</h1>
-        <div className="search">
-          <p>Enter City</p>
-          <input type="text" value={this.state.city} onChange={this.updateCity} />
-          { this.state.city === "" ? <p></p> : this.fetch ? <p>no results</p> : <ul>{this.getResults()}</ul>}
-        </div>
-        <div className="cont"></div>
+      <div className="layout-container">
+        <h1 className="header">City Search</h1>
+        <label className="input-label">
+          City:
+          <input
+            className="search-field"
+            type="text"
+            value={this.state.city}
+            onChange={this.updateCity}
+          />
+        </label>
+        {this.state.data.length ? (
+          <div className="results-container">
+            <ul className="results">{this.getResults()}</ul>
+          </div>
+        ) : (
+          <p>No Results</p>
+        )}
       </div>
     );
   }
